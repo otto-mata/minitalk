@@ -1,0 +1,3 @@
+[submodule "osgc"]
+	path = osgc
+	url = git@github.com:otto-mata/otto-simple-gc.git
