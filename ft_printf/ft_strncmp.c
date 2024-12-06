@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tblochet <tblochet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/30 18:30:23 by tblochet          #+#    #+#             */
-/*   Updated: 2024/12/02 11:06:52 by tblochet         ###   ########.fr       */
+/*   Created: 2024/11/09 11:01:51 by tblochet          #+#    #+#             */
+/*   Updated: 2024/11/26 14:14:27 by tblochet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# include <stdlib.h>
-# include <string.h>
-# include "osgc/osgc.h"
+#include "ft_printf.h"
 
-typedef struct s_vector	t_vector;
-
-struct					s_vector
+static size_t	ft_min(size_t a, size_t b)
 {
-	unsigned long		len;
-	unsigned long		sz;
-	char				*content;
-};
+	if (a < b)
+		return (a);
+	return (b);
+}
 
-void					pm_vector_destroy(t_vector **vec);
-int						pm_vector_append(t_vector *vec, char val);
-t_vector				*pm_vector_new(unsigned long start_sz);
+static size_t	ft_max(size_t a, size_t b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
 
-#endif
+int	ft_strncmp(char const *s1, char const *s2, size_t n)
+{
+	n = ft_min(n, ft_max(ft_strlen(s1), ft_strlen(s2)));
+	return (ft_memcmp(s1, s2, n));
+}

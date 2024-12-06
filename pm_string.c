@@ -1,50 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pm_vector.c                                        :+:      :+:    :+:   */
+/*   pm_string.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tblochet <tblochet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:17:30 by tblochet          #+#    #+#             */
-/*   Updated: 2024/12/04 01:04:45 by tblochet         ###   ########.fr       */
+/*   Updated: 2024/12/06 21:33:42 by tblochet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <stdio.h>
+#include "server.h"
 
-t_vector	*pm_vector_new(unsigned long start_sz)
+t_string	*pm_string_new(unsigned long start_sz)
 {
-	t_vector	*vec;
+	t_string	*str;
 
-	vec = osgc_malloc(sizeof(t_vector));
-	if (!vec)
+	str = osgc_malloc(sizeof(t_string));
+	if (!str)
 		return (0);
-	vec->len = 1;
-	vec->sz = start_sz;
-	vec->content = osgc_calloc(vec->sz, sizeof(char));
-	if (!vec->content)
+	str->len = 1;
+	str->sz = start_sz;
+	str->content = osgc_calloc(str->sz, sizeof(char));
+	if (!str->content)
 		return (0);
-	return (vec);
+	return (str);
 }
 
-int	pm_vector_append(t_vector *vec, char val)
+int	pm_string_append(t_string *str, char val)
 {
-	while (vec->sz / 2 < (vec->len + 1))
+	while (str->sz / 2 < (str->len + 1))
 	{
-		vec->content = osgc_realloc(vec->content, vec->sz, vec->sz * 2);
-		vec->sz *= 2;
+		str->content = osgc_realloc(str->content, str->sz, str->sz * 2);
+		str->sz *= 2;
 	}
-	if (!vec)
+	if (!str)
 		return (0);
-	vec->content[vec->len - 1] = val;
-	vec->content[vec->len] = 0;
-	vec->len++;
+	str->content[str->len - 1] = val;
+	str->content[str->len] = 0;
+	str->len++;
 	return (1);
 }
 
-void	pm_vector_destroy(t_vector **vec)
+void	pm_string_destroy(t_string **str)
 {
-	// (*vec)->content = 0;
-	*vec = 0;
+	*str = 0;
 }
